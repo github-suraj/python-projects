@@ -1,10 +1,11 @@
 import sys
-import os
-file_path = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(file_path, '..'))
+import urllib.request
 
-from utils.connection import check_internet_connection
-check_internet_connection()
+try:
+    urllib.request.urlopen('http://google.com')
+except:
+    print('No Internet Connection...')
+    sys.exit(1)
 
 import random
 from word_source import WordSource
