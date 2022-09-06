@@ -21,6 +21,8 @@ def get_data_from_rest_api(endpoint: str, identifier: str) -> str:
     '''
     url = f"{BASE_URL}/{endpoint}/{identifier}?detail=dataonly"
     response = requests.get(url)
+    if response.status_code == 404:
+        raise ValueError(f"InValid Identifier {identifier}")
     return response.content
 
 
