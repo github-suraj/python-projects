@@ -7,14 +7,15 @@ Provide functionality to pull EXR - Exchange Rates, BP6 - Balance of Payments an
 ## Setup environment
 - change directory to the project root directory
 - Create a virtual environment
-    python -m venv venv
+    `python -m venv venv`
 - Upgrade version for pip
-    python -m pip install pip --upgrade
+    `python -m pip install pip --upgrade`
 - Install dependencies
-    python -m pip install -r requirement.txt
+    `python -m pip install -r requirement.txt`
 - Activate Virtual environment
-    Linux : . venv/Scripts/activate 
-    Windows : venv\Scripts\activate.bat
+    `. venv/Scripts/activate (Linux)`
+    OR
+    `venv\Scripts\activate.bat (Windows)`
 
 ## Usage
 
