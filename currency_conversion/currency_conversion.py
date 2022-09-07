@@ -51,7 +51,6 @@ def get_exchange_rate(source: str, target: str = "EUR") -> pd.DataFrame:
 
     data_frame = pd.DataFrame(rows, columns=['TIME_PERIOD', 'OBS_VALUE'])
     data_frame['OBS_VALUE'] = data_frame['OBS_VALUE'].apply(lambda x: round(float(x), 6))
-    data_frame.set_index('TIME_PERIOD', inplace=True)
     return data_frame
 
 
@@ -78,7 +77,6 @@ def get_raw_data(identifier: str) -> pd.DataFrame:
 
     data_frame = pd.DataFrame(rows, columns=['TIME_PERIOD', 'OBS_VALUE'])
     data_frame['OBS_VALUE'] = data_frame['OBS_VALUE'].apply(lambda x: round(float(x), 6))
-    data_frame.set_index('TIME_PERIOD', inplace=True)
     return data_frame
 
 
@@ -102,7 +100,9 @@ def get_data(
     df_raw = get_raw_data(identifier)
     if target_currency:
         df_exr = get_exchange_rate(target_currency)
-        df_raw *= df_exr
+        df_raw = (
+            df_raw.set_index('TIME_PERIOD') * df_exr.set_index('TIME_PERIOD')
+        ).reset_index()
     df_raw.fillna(value=0, inplace=True)
     return df_raw
 

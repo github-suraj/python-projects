@@ -12,6 +12,7 @@ class TestCurrencyConversion(unittest.TestCase):
     '''
     identifier = "M.N.I8.W1.S1.S1.T.N.FA.F.F7.T.EUR._T.T.N"
     currency_code = "GBP"
+    columns = ['TIME_PERIOD', 'OBS_VALUE']
 
     def test_get_raw_data_invalid_currency_identifier(self):
         '''
@@ -60,6 +61,8 @@ class TestCurrencyConversion(unittest.TestCase):
         identifier = "M.N.I8.W1.S1.S1.T.N.FA.F.F7.T.EUR._T.T.N"
         dataframe = get_raw_data(identifier)
         self.assertTrue(isinstance(dataframe, pd.DataFrame))
+        columns = dataframe.columns.to_list()
+        self.assertEqual(columns, self.columns)
 
     def test_get_exchange_rate_valid_currency_code(self):
         '''
@@ -68,6 +71,8 @@ class TestCurrencyConversion(unittest.TestCase):
         currency_code = "GBP"
         dataframe = get_exchange_rate(currency_code)
         self.assertTrue(isinstance(dataframe, pd.DataFrame))
+        columns = dataframe.columns.to_list()
+        self.assertEqual(columns, self.columns)
 
     def test_get_data(self):
         '''
@@ -76,6 +81,8 @@ class TestCurrencyConversion(unittest.TestCase):
         '''
         dataframe = get_data(self.identifier, self.currency_code)
         self.assertTrue(isinstance(dataframe, pd.DataFrame))
+        columns = dataframe.columns.to_list()
+        self.assertEqual(columns, self.columns)
 
     def test_get_data_only_currency_identifier(self):
         '''
@@ -83,3 +90,5 @@ class TestCurrencyConversion(unittest.TestCase):
         '''
         dataframe = get_data(self.identifier)
         self.assertTrue(isinstance(dataframe, pd.DataFrame))
+        columns = dataframe.columns.to_list()
+        self.assertEqual(columns, self.columns)
